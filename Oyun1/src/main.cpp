@@ -89,6 +89,7 @@ int main()
 			pencere.draw(bul);
 		}
 
+
 		pencere.display();
 	}
 
