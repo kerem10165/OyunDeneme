@@ -12,7 +12,8 @@ float width = 1600;
 float height = 900;
 float ana = 150;
 
-
+float bul_time = 0.f;
+extern "C" __declspec(dllexport) unsigned long NvOptimusEnablement = 1;
 
 int main()
 {
@@ -33,7 +34,6 @@ int main()
 	while (pencere.isOpen())
 	{
 		sf::Event event;
-		int i = 0;
 
 		while (pencere.pollEvent(event))
 		{
@@ -52,7 +52,15 @@ int main()
 		//update
 		dt = clock.restart().asSeconds();
 		player.hareket(dt);
-		player.sikma(dt, bullets , pencere);
+		
+		if (bul_time < 5)
+			bul_time += 1 * dt * 60;
+		else
+		{
+			player.sikma(dt, bullets, pencere);
+			bul_time = 0;
+		}
+		
 		
 		std::list<Bullet>::iterator it = bullets.begin();
 
@@ -68,7 +76,6 @@ int main()
 			}
 
 			++it;
-			++i;
 		}
 
 		
@@ -83,7 +90,6 @@ int main()
 		}
 
 		pencere.display();
-		cout << i << endl;
 	}
 
 	

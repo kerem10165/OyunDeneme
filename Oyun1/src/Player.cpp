@@ -31,7 +31,7 @@ void Player::sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWi
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		Bullet bul(getSize().x / 7, getPosition().x, getPosition().y, width, height);
+		Bullet bul(getSize().x / 8, getPosition().x, getPosition().y, width, height);
 		int mouseX{ sf::Mouse::getPosition(pencere).x };
 		int mouseY{ sf::Mouse::getPosition(pencere).y };
 		int dist = sqrt(pow(getPosition().x - mouseX, 2) + pow(getPosition().y - mouseY, 2));
