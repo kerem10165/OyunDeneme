@@ -92,7 +92,5 @@ int main()
 		pencere.display();
 	}
 
-	
-
 	return 0;
 }
