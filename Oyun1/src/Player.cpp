@@ -16,12 +16,12 @@ void Player::hareket(const float dt)
 {
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && RectangleShape::getPosition().x >= 0 + RectangleShape::getSize().x / 2)
 	{
-		move(-5 * dt * 60.0, 0);
+		move(-7 * dt * 60.0, 0);
 	}
 
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && RectangleShape::getPosition().x <= width - RectangleShape::getSize().x / 2)
 	{
-		move(+5 * dt * 60.0, 0);
+		move(+7 * dt * 60.0, 0);
 	}
 }
 

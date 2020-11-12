@@ -4,6 +4,7 @@
 #include <SFML\Window.hpp>
 #include "Player.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 using std::cout;
 using std::endl;
@@ -19,14 +20,18 @@ int main()
 {
 	sf::RenderWindow pencere(sf::VideoMode(width, height), "oyun");
 
-	//pencere.setFramerateLimit(60);
+	pencere.setFramerateLimit(1000);
 
 	Player player(width / 15, width / 15, width / 2 , height - (10*height/ana) - width /30, sf::Color::Blue);
 
 	std::list<Bullet> bullets;
 
-	
-	
+	cout << sizeof(sf::RectangleShape);
+
+	std::list<Enemy> enemys;
+
+	float enemy_time = 0;
+
 	sf::Clock clock;
 	float dt;
 
@@ -60,12 +65,37 @@ int main()
 			player.sikma(dt, bullets, pencere);
 			bul_time = 0;
 		}
+
+		if (enemy_time < 135)
+		
+			enemy_time += 1 * 60 * dt;
+		else
+		{
+			enemy_time = 0;
+			enemys.emplace_back(60, 60, width, height);
+		}
 		
 		
 		std::list<Bullet>::iterator it = bullets.begin();
+		std::list<Enemy>::iterator it1 = enemys.begin();
+
+		while (it1 != enemys.end())
+		{
+			it1->hareket(dt);
+			if (it1->control())
+			{
+				std::list<Enemy>::iterator temp = ++it1;
+				enemys.erase(--it1);
+				it1 = temp;
+				continue;
+			}
+
+			++it1;
+		}
 
 		while (it != bullets.end())
 		{
+			it1 = enemys.begin();
 			it->hareket(dt);
 			if (it->control())
 			{
@@ -75,10 +105,28 @@ int main()
 				continue;
 			}
 
-			++it;
-		}
+			while (it1 != enemys.end() && it != bullets.end())
+			{
+				if (it1->control(*it))
+				{
+					std::list<Bullet>::iterator temp1 = ++it;
+					bullets.erase(--it);
+					it = temp1;
 
-		
+					std::list<Enemy>::iterator tempp = ++it1;
+					enemys.erase(--it1);
+					it1 = tempp;
+					continue;
+				}
+
+				it1++;
+			}
+
+			if (it != bullets.end())
+			{
+				it++;
+			}
+		}
 
 		//draw
 		pencere.clear();
@@ -87,6 +135,10 @@ int main()
 		for (Bullet& bul : bullets)
 		{
 			pencere.draw(bul);
+		}
+		for (Enemy& enemy : enemys)
+		{
+			pencere.draw(enemy);
 		}
 
 

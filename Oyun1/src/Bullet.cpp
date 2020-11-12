@@ -12,7 +12,7 @@ Bullet::Bullet(float rad, float x, float y, float width, float height)
 
 void Bullet::hareket(float dt)
 {
-	move(dir_x * dt * 60 * 5, dir_y * dt * 60 * 5);
+	move(dir_x * dt * 60 * 10, dir_y * dt * 60 * 10);
 }
 
 bool Bullet::control()
