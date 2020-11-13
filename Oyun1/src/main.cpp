@@ -18,6 +18,10 @@ extern "C" __declspec(dllexport) unsigned long NvOptimusEnablement = 1;
 
 int main()
 {
+	int can = 5;
+
+	cout << "Can: " << can << endl;
+
 	sf::RenderWindow pencere(sf::VideoMode(width, height), "oyun");
 
 	//pencere.setFramerateLimit(60);
@@ -25,8 +29,6 @@ int main()
 	Player player(width / 15, width / 15, width / 2 , height - (10*height/ana) - width /30, sf::Color::Blue);
 
 	std::list<Bullet> bullets;
-
-	cout << sizeof(sf::RectangleShape);
 
 	std::list<Enemy> enemys;
 
@@ -55,6 +57,10 @@ int main()
 			}
 		}
 
+		if (can == 0)
+		{
+			pencere.close();
+		}
 
 		//update
 		dt = clock.restart().asSeconds();
@@ -86,6 +92,7 @@ int main()
 			{
 				std::list<Enemy>::iterator temp = ++it1;
 				enemys.erase(--it1);
+				cout << "Can: " << --can << endl;
 				it1 = temp;
 				continue;
 			}
