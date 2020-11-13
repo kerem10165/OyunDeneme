@@ -14,7 +14,7 @@ float height = 900;
 float ana = 150;
 
 float bul_time = 0.f;
-//extern "C" __declspec(dllexport) unsigned long NvOptimusEnablement = 1;
+extern "C" __declspec(dllexport) unsigned long NvOptimusEnablement = 1;
 
 int main()
 {
@@ -62,11 +62,9 @@ int main()
 		
 		if (bul_time < 14)
 			bul_time += 1 *dt *60 ;
-		else
-		{
-			player.sikma(dt, bullets, pencere);
-			bul_time = 0;
-		}
+			
+		player.sikma(dt, bullets, pencere,bul_time);
+		
 
 		if (enemy_time < 100)
 		

@@ -33,7 +33,7 @@ public:
 		height = h;
 	}
 
-	void sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWindow& pencere);
+	void sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWindow& pencere , float& bul_time);
 
 private:
 	float width;

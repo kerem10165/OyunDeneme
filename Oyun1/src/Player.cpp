@@ -27,9 +27,9 @@ void Player::hareket(const float dt)
 
 
 
-void Player::sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWindow& pencere)
+void Player::sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWindow& pencere , float& bul_time)
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && bul_time >= 14)
 	{
 		Bullet bul(getSize().x / 8, getPosition().x, getPosition().y, width, height);
 		int mouseX{ sf::Mouse::getPosition(pencere).x };
@@ -38,5 +38,6 @@ void Player::sikma(const float dt, std::list<Bullet>& liste , const sf::RenderWi
 		bul.setDirX((mouseX - getPosition().x ) / dist);
 		bul.setDirY((mouseY - getPosition().y) / dist);
 		liste.push_back(std::move(bul));
+		bul_time = 0;
 	}
 }
